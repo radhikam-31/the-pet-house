@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Pet House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app">
+
+  <!-- Step 1: species -->
+  <section id="screen-species" class="screen pixel">
+    <h1 class="logo">The Pet House</h1>
+    <h2>Choose your tiny troublemaker.</h2>
+    <div class="row">
+      <button class="card pixel" data-species="cat"><canvas width="64" height="64"></canvas><span class="card-name">Cat</span></button>
+      <button class="card pixel" data-species="dog"><canvas width="64" height="64"></canvas><span class="card-name">Dog</span></button>
+    </div>
+  </section>
+
+  <!-- Step 2: pick one of three -->
+  <section id="screen-pick" class="screen pixel hidden">
+    <h2 id="pick-title"></h2>
+    <div id="pick-cards" class="row"></div>
+    <button id="pick-back" class="btn">Back</button>
+  </section>
+
+  <!-- Step 3: name and confirm -->
+  <section id="screen-name" class="screen pixel hidden">
+    <canvas id="name-preview" width="64" height="64"></canvas>
+    <p id="name-desc"></p>
+    <label for="name-input">Give your pet a name</label>
+    <input id="name-input" maxlength="14" autocomplete="off">
+    <div class="row">
+      <button id="name-back" class="btn">Back</button>
+      <button id="name-confirm" class="btn primary">Enter the room</button>
+    </div>
+  </section>
+
+  <!-- The game -->
+  <section id="screen-game" class="hidden">
+    <header class="topbar pixel">
+      <span class="logo small">The Pet House</span>
+      <span id="pet-title"></span>
+      <span class="coins"><i class="coin"></i><b id="coins">0</b> Treat Coins</span>
+      <button id="deco-open" class="btn small">Decorate</button>
+      <button id="reset" class="btn small">Reset</button>
+    </header>
+    <div id="stage" class="pixel">
+      <canvas id="room" width="384" height="216" role="img" aria-label="Your pet's cozy room. Click your pet to pet it."></canvas>
+      <div id="bubble" class="bubble" role="status" aria-live="polite"></div>
+      <div id="floaters"></div>
+    </div>
+    <div id="care">
+    <div id="stats" class="stats pixel"></div>
+    <nav class="actions" aria-label="Care actions">
+      <button class="btn" data-action="feed">Feed</button>
+      <button class="btn" data-action="play">Play</button>
+      <button class="btn" data-action="rest">Rest</button>
+      <button class="btn" data-action="groom">Groom</button>
+      <button class="btn" data-action="pet">Pet</button>
+    </nav>
+    </div>
+    <aside id="deco" class="deco pixel hidden" aria-label="Decorate your room">
+      <div class="deco-head"><b class="logo small">Decorate</b><span class="coins"><i class="coin"></i><b id="deco-coins">0</b> Treat Coins</span><button id="deco-close" class="btn small">Back to pet</button></div>
+      <div id="deco-tabs" role="tablist"></div>
+      <div id="deco-list"></div>
+      <div id="deco-extra" class="hidden"></div>
+      <div id="deco-detail"></div>
+      <p id="deco-msg" role="status"></p>
+    </aside>
+  </section>
+
+</main>
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script src="game.js"></script>
+<script src="room.js"></script>
+<script src="render.js"></script>
+<script src="decorate.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+/* DESIGN TOKENS: change these to restyle the whole UI */
+:root {
+  --cream: #e4cef1; --pink: #FBE4EA; --lav: #DCCBF0; --blue: #BFE0F5;
+  --mint: #BDE5D0; --peach: #F2C9A5; --brown: #7A5A48; --ink: #5A3F33; --gold: #F4C95D;
+  --px: 4px;
+  --font-ui: 'Pixelify Sans', monospace;
+  --font-px: 'Pixelify Sans', monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; background: #F4E7E9; color: var(--ink); font-family: var(--font-px); font-weight: 500; }
+* { font-family: var(--font-px); }
+@media (max-height: 760px) {
+  body { align-items: flex-start; }
+}
+#app { width: min(880px, 100%); margin: auto; padding: clamp(12px, 3vmin, 32px); }
+#screen-game { width: 100%; }
+#care { width: 100%; }
+@media (max-width: 600px) {
+  #app { padding: 14px 12px; }
+  .topbar { justify-content: center; }
+  #stage { width: 100%; }
+}
+@media (max-height: 560px) {
+  #app { padding-top: 12px; padding-bottom: 12px; }
+}
+.hidden { display: none !important; }
+
+/* notched pixel border */
+.pixel {
+  background: var(--cream); margin: 4px; border: 3px solid var(--brown);
+  box-shadow: none;
+}
+.screen { padding: 24px 16px; text-align: center; }
+.row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
+h1, h2, .logo { font-family: var(--font-px); margin: 8px 0; }
+.logo { font-size: 2rem; color: var(--brown); }
+.logo.small { font-size: 1.1rem; }
+
+.btn {
+  font: 800 1rem var(--font-px); color: var(--ink); background: var(--cream); cursor: pointer;
+  padding: 12px 14px; border: 2px solid var(--brown); margin: 2px;
+  box-shadow: none;
+  transition: transform .1s;
+}
+.btn:hover { background: var(--lav); transform: translateY(-2px); }
+.btn:active { transform: translateY(1px); }
+.btn.primary { background: var(--mint); }
+.btn.small { padding: 6px 10px; font-size: .85rem; }
+:focus-visible { outline: 3px dashed var(--ink); outline-offset: 3px; }
+
+.card { border: 0; cursor: pointer; padding: 12px; width: 190px; font-family: var(--font-px); color: var(--ink); }
+.card:hover { background: var(--pink); }
+.card canvas, #name-preview { width: 128px; height: 128px; image-rendering: pixelated; display: block; margin: 0 auto 8px; }
+.card-name { display: block; font: 700 1.2rem var(--font-px); }
+.card small { display: block; font-weight: 600; margin-top: 4px; }
+input {
+  font: 700 1.1rem var(--font-px); color: var(--ink); background: #fff; text-align: center;
+  padding: 10px; border: 2px solid var(--brown); width: 220px; display: block; margin: 8px auto;
+}
+
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; padding: 8px 12px; }
+#pet-title { font: 700 1.1rem var(--font-px); }
+.coins { display: flex; align-items: center; gap: 6px; }
+.coin { width: 14px; height: 14px; background: var(--gold); border: 3px solid var(--brown); display: inline-block; }
+
+#stage { position: relative; padding: 0; line-height: 0; margin-top: 12px; }
+#room { width: 100%; height: auto; aspect-ratio: 16 / 9; image-rendering: pixelated; cursor: pointer; display: block; }
+
+.bubble {
+  display: none; position: absolute; left: 50%; top: 22%; transform: translateX(-50%);
+  max-width: 64%; background: #fff; padding: 8px 12px; line-height: 1.3; text-align: center;
+  font: 500 .85rem var(--font-px); pointer-events: none;
+  box-shadow: 0 -3px 0 0 var(--brown), 0 3px 0 0 var(--brown), -3px 0 0 0 var(--brown), 3px 0 0 0 var(--brown);
+}
+.bubble.show { display: block; animation: pop .2s ease-out; }
+.bubble::after { content: ''; position: absolute; left: 50%; bottom: -11px; width: 8px; height: 8px; background: #fff;
+  box-shadow: 3px 0 0 var(--brown), -3px 0 0 var(--brown), 0 3px 0 var(--brown); margin-left: -4px; }
+@keyframes pop { from { transform: translateX(-50%) scale(.85); } to { transform: translateX(-50%) scale(1); } }
+
+#floaters { position: absolute; inset: 0; pointer-events: none; }
+.floater { position: absolute; left: 50%; top: 45%; font: 700 1.1rem var(--font-px); color: var(--brown);
+  background: var(--gold); padding: 2px 8px; animation: rise 1.2s ease-out forwards; }
+@keyframes rise { to { transform: translateY(-50px); opacity: 0; } }
+
+.stats { padding: 12px 16px; display: grid; gap: 8px; margin-top: 12px; }
+.stat { display: grid; grid-template-columns: 90px 1fr 38px; align-items: center; gap: 10px; font-weight: 800; }
+.track { height: 16px; background: #fff; border: 2px solid var(--brown); }
+.fill { height: 100%; width: 0; transition: width .4s; }
+.fill.low { animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: .55; } }
+.hearts { font-weight: 800; color: #D86A8C; }
+
+.actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 6px; margin-top: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01s !important; transition: none !important; }
+}
+@media (max-width: 520px) { .stat { grid-template-columns: 74px 1fr 34px; } .card { width: 150px; } }
+
+/* Stage 4: keep the room (and so the controls) on screen on short displays */
+#stage { width: min(calc(100% - 8px), calc(54vh * 16 / 9)); width: min(calc(100% - 8px), calc(54dvh * 16 / 9)); margin-left: auto; margin-right: auto; }
+.deco { padding: 12px 16px; margin-top: 12px; }
+.deco-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+#deco-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin: 8px 0; }
+.tab[aria-selected="true"], #lt-colors [aria-pressed="true"] { background: var(--mint); }
+#deco-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; max-height: 30vh; overflow: auto; padding: 4px; }
+#deco-list h3 { grid-column: 1 / -1; margin: 6px 0 0; font: 700 .95rem var(--font-px); }
+.item { text-align: left; font: 500 .78rem var(--font-px); color: var(--ink); background: #fff; border: 2px solid var(--brown); padding: 8px; cursor: pointer; }
+.item:hover { background: var(--pink); }
+.item.sel { outline: 3px solid var(--ink); outline-offset: 1px; background: var(--lav); }
+.item small { display: block; font-weight: 600; }
+.sw { display: inline-block; width: 16px; height: 16px; border: 1px solid var(--brown); margin-right: 2px; }
+#deco-detail { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; min-height: 48px; }
+#deco-extra { display: grid; gap: 6px; margin-top: 10px; }
+.ctl { display: flex; align-items: center; gap: 10px; font-weight: 800; }
+.ctl input[type=range] { flex: 1; max-width: 260px; }
+#deco-msg { min-height: 1.4em; margin: 6px 0 0; font-weight: 800; }
+
+/* Consistent type and clean, continuous outlines across all decoration controls. */
+button, input, select, textarea, label, small, p, .item, .card, .bubble, .stat, .ctl { font-family: var(--font-px) !important; }
+.pixel, .item, input, .track, .sw { border-style: solid; border-collapse: collapse; }
